@@ -1,1 +1,1 @@
-# skwd10-niwd3-wdel2
+# skwd10-wdel2
