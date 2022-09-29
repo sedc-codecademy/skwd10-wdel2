@@ -1,10 +1,10 @@
 const router = require("express").Router();
-const userValidator = require("../../middleware/user-validator.middleware");
 const AuthController = require("./auth.controller");
+const userValidator = require("../../middleware/user-validator.middleware");
 
-// localhost:3000/api/auth/register
 router.post("/register", userValidator, AuthController.registerUser);
 router.post("/login", AuthController.loginUser);
 router.post("/:id/logout", AuthController.logoutUser);
+router.post("/refresh-token", AuthController.refreshAccessToken);
 
 module.exports = router;

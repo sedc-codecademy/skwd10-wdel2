@@ -1,8 +1,6 @@
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
-// Defines the database validation
-
 const userSchema = new Schema({
   email: {
     type: String,
@@ -12,7 +10,6 @@ const userSchema = new Schema({
   password: {
     type: String,
     required: true,
-    // Qwerty1$ works
     match: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/,
   },
   refreshTokens: {

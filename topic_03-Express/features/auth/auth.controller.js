@@ -1,17 +1,17 @@
 const AuthService = require("./auth.service");
-const User = require("./auth.model");
 const {
   createAccessToken,
   createRefreshToken,
   verifyRefreshToken,
 } = require("../../const/jwt.const");
+const User = require("./auth.model");
 
 class AuthController {
   static async registerUser(req, res) {
     try {
       const { email, password } = req.body;
       const registeredUser = await AuthService.registerUser(email, password);
-      res.status(200).json({ message: "User successfully created!" });
+      res.status(200).json({ message: "User successfully created." });
     } catch (error) {
       res.status(400).json(error);
     }
@@ -22,41 +22,65 @@ class AuthController {
       const { email, password } = req.body;
       const user = await AuthService.loginUser(email, password);
       const userId = user._doc._id.toString();
-
       // Create access token
       const accessToken = createAccessToken(userId);
-      // Create refresh token
+
+      // Create and send the refresh token cookie to the client
       const refreshToken = createRefreshToken(userId);
 
       // Save the refresh token in the database
-      const passwordlessUser = await AuthService.saveRefreshToken(
-        userId,
-        refreshToken
-      );
+      await AuthService.saveRefreshToken(userId, refreshToken);
 
       res.cookie("refresh-token", refreshToken, {
         httpOnly: true,
         secure: false,
         path: "/refresh-token",
       });
-
-      res.status(200).json({ passwordlessUser, accessToken, refreshToken });
+      
+      res.status(200).json({ user, accessToken, refreshToken });
     } catch (error) {
-      res.status(400).json({ message: "Login failed. Try again" });
+      res.status(400).json({ message: "Login failed. Try again." });
     }
   }
 
   static async logoutUser(req, res) {
     try {
-      // req.params contains the parameters from URL
-      // http://localhost:3000/api/todos/1 <- this /1 can be set up as the ID
       const userId = req.params.id;
       const refreshToken = req.body.refreshToken;
 
       await AuthService.deleteRefreshToken(userId, refreshToken);
-      res.status(200).json({ message: "User successfully logged out!" });
+      res.status(200).json({ message: "User successfully logged out" });
     } catch (error) {
       res.status(400).json(error);
+    }
+  }
+
+  static async refreshAccessToken(req, res) {
+    try {
+      const refreshToken = req.body.refreshToken;
+      if (!refreshToken) {
+        return res.status(403).json({ message: "Refresh token missing." });
+      }
+      const { userId } = verifyRefreshToken(refreshToken);
+      const foundUser = await User.findById(userId);
+      if (!foundUser) {
+        return res.status(403).json({ message: "User not found!" });
+      }
+
+      if (!foundUser.refreshTokens.some((token) => token === refreshToken)) {
+        return res.status(403).json({ message: "Non authentic token." });
+      }
+
+      const accessToken = createAccessToken(userId);
+      const newRefreshToken = createRefreshToken(userId);
+
+      await AuthService.deleteRefreshToken(userId, refreshToken);
+
+      await AuthService.saveRefreshToken(userId, newRefreshToken);
+
+      res.status(200).send({ accessToken, refreshToken: newRefreshToken });
+    } catch (error) {
+      res.status(403).json(error);
     }
   }
 }

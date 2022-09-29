@@ -1,3 +1,4 @@
+const { deleteTodo } = require("./todos.service");
 const TodosService = require("./todos.service");
 
 class TodosController {
@@ -29,18 +30,28 @@ class TodosController {
     }
   }
 
-  static async updateTodoProgress(request, response) {
-    const todoProgress = request.body.progress;
-    const todoId = request.params.id;
+  static async updateTodoProgress(req, res) {
+    const todoProgress = req.body.progress;
+    const todoId = req.params.id;
 
     try {
       const response = await TodosService.updateTodoProgress(
         todoId,
         todoProgress
       );
-      response.status(200).json(response);
+      res.status(200).json(response);
     } catch (error) {
-      response.status(400).json(error);
+      res.status(400).json(error);
+    }
+  }
+
+  static async deleteTodo(req, res) {
+    const todoId = req.params.id;
+    try {
+      const deletedTodo = await TodosService.deleteTodo(todoId);
+      res.status(200).json(deletedTodo);
+    } catch (error) {
+      res.status(400).json(error);
     }
   }
 }
