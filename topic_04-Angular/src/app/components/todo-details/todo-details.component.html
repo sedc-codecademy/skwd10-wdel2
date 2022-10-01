@@ -21,10 +21,23 @@
     {{ todoToDisplay.email | lowercase }}
   </div>
   <p [ngStyle]="{ 'font-size': calculateRem(2) }">
-    Progress: {{ todoToDisplay.progress | number:"1.0-2" }}
+    Progress: {{ todoToDisplay.progress | number: "1.0-2" }}
   </p>
   <p [ngStyle]="{ 'font-size': calculateRem(2) }">
-    Progress Percentage: {{ todoToDisplay.progress / 100 | percent:"1.2-2" }}
+    Progress Percentage: {{ todoToDisplay.progress / 100 | percent: "1.2-2" }}
   </p>
   <div class="todo-card__description">{{ todoToDisplay.description }}</div>
+  <form class="progres-form">
+    <div class="control-group">
+      <label for="update-progress" class="control-label">Update Progress</label>
+      <input
+        type="text"
+        class="control-input"
+        autocomplete="off"
+        id="update-progress"
+        #updateInput
+      />
+    </div>
+    <button type="button" (click)="onUpdateProgress()" class="btn btn-primary">Update</button>
+  </form>
 </div>

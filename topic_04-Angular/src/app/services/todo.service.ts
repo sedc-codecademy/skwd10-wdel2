@@ -57,7 +57,6 @@ export class TodoService {
         'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nemo ratione ex est autem perferendis voluptatibus numquam aspernatur saepe neque quasi deserunt, consectetur accusamus totam veritatis fugiat aliquam incidunt exercitationem eos!',
       date: '2022-10-01',
     };
-
     return fetch(`${environment.baseUrl}/todos`, {
       method: 'POST',
       headers: {
@@ -73,7 +72,19 @@ export class TodoService {
         method: 'DELETE',
       });
     }
-
     return Promise.reject({ message: 'Id was not supplied!' });
+  }
+
+  updateTodoProgress(progressUpdate: string, id: string | number | undefined) {
+    if (!id) {
+      return Promise.reject({ message: 'Id was not supplied!' });
+    }
+    return fetch(`${environment.baseUrl}/todos/${id}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ progress: progressUpdate }),
+    });
   }
 }

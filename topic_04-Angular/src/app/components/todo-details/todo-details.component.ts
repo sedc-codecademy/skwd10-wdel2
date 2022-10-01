@@ -1,5 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { Todo } from 'src/app/interfaces/todo';
+import { TodoService } from 'src/app/services/todo.service';
 
 @Component({
   selector: 'todo-details',
@@ -8,9 +9,10 @@ import { Todo } from 'src/app/interfaces/todo';
 })
 export class TodoDetailsComponent implements OnInit {
   @Input() todoToDisplay: Todo;
+  @ViewChild('updateInput') public updateInput: ElementRef;
   basePrice = 39.99;
 
-  constructor() {}
+  constructor(private todoService: TodoService) {}
 
   ngOnInit(): void {}
 
@@ -27,6 +29,12 @@ export class TodoDetailsComponent implements OnInit {
     } else {
       return `$${price}`;
     }
+  }
+
+  onUpdateProgress() {
+    const newProgress = this.updateInput.nativeElement.value;
+    const todoId = this.todoToDisplay._id;
+    this.todoService.updateTodoProgress(newProgress, todoId);
   }
 
   // Translation Pipe Library
