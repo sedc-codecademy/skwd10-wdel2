@@ -1,0 +1,20 @@
+<div class="todo-card">
+  <div class="todo-card__title">{{ currentTodo.title | uppercase }}</div>
+  <div class="todo-card__date">{{ currentTodo.date | date: "fullDate" }}</div>
+  <div class="todo-card__description">
+    {{ currentTodo.description | shorten: 10 }}
+  </div>
+  <progress max="100" [value]="currentTodo.progress"></progress>
+  <div class="todo-card__actions">
+    <button
+      type="button"
+      (click)="onDisplayTodo(currentTodo)"
+      class="btn btn-primary"
+    >
+      Display
+    </button>
+    <button (click)="onDeleteTodo()" type="button" class="btn btn-danger">
+      Delete
+    </button>
+  </div>
+</div>

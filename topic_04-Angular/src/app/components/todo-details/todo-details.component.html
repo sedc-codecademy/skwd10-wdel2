@@ -1,0 +1,30 @@
+<div
+  class="todo-card"
+  *ngIf="todoToDisplay"
+  [ngClass]="todoToDisplay.progress === 100 ? 'green' : 'orange'"
+  [ngStyle]="{ 'margin-top': calculateRem(4) }"
+>
+  <div class="todo-card__title">{{ todoToDisplay.title | uppercase }}</div>
+  <div class="todo-card__progress">
+    <progress max="100" [value]="todoToDisplay.progress"></progress>
+  </div>
+  <div class="todo-card__date">
+    {{ todoToDisplay.date | date: "EEE, dd MMM yyyy GG" }}
+  </div>
+  <div class="price-pipe" [ngStyle]="{ 'font-size': calculateRem(2) }">
+    {{ basePrice | currency: "EUR" }}
+  </div>
+  <div class="price-pipe" [ngStyle]="{ 'font-size': calculateRem(2) }">
+    {{ convertToCurrency(45.99, "EUR") }}
+  </div>
+  <div class="todo-card__email">
+    {{ todoToDisplay.email | lowercase }}
+  </div>
+  <p [ngStyle]="{ 'font-size': calculateRem(2) }">
+    Progress: {{ todoToDisplay.progress | number:"1.0-2" }}
+  </p>
+  <p [ngStyle]="{ 'font-size': calculateRem(2) }">
+    Progress Percentage: {{ todoToDisplay.progress / 100 | percent:"1.2-2" }}
+  </p>
+  <div class="todo-card__description">{{ todoToDisplay.description }}</div>
+</div>

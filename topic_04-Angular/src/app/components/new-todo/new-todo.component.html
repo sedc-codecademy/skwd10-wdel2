@@ -1,0 +1,17 @@
+<div class="card">
+  <form>
+    <div class="control-group">
+      <label for="title" class="control-label">Title</label>
+      <input type="text" class="control-input" id="title" autocomplete="off" />
+    </div>
+    <div class="control-group">
+      <label for="description" class="control-label">Description</label>
+      <textarea
+        appTextareaAutosize
+        id="description"
+        autocomplete="off"
+      ></textarea>
+    </div>
+    <button class="btn btn-primary" type="button" (click)="onSubmitTodo()">Submit</button>
+  </form>
+</div>

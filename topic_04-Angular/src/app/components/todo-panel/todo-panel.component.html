@@ -1,0 +1,25 @@
+<!-- <div class="todo-card">
+  <div class="todo-card__title">{{ todos[0].title }}</div>
+  <div class="todo-card__date">{{ todos[0].date }}</div>
+  <div class="todo-card__description">{{ todos[0].description }}</div>
+</div> -->
+
+<!-- <todo-card [currentTodo]="todos[0]" (displayTodo)="displayTodoEvent($event)"></todo-card>
+<todo-card [currentTodo]="todos[1]"></todo-card>
+<todo-card [currentTodo]="todos[2]"></todo-card>
+<todo-card [currentTodo]="todos[3]"></todo-card> -->
+
+<todo-card
+  *ngFor="let todo of todos"
+  [currentTodo]="todo"
+  (displayTodo)="displayTodoEvent($event)"
+></todo-card>
+
+<todo-details
+  *ngIf="currentDisplayTodo"
+  [todoToDisplay]="currentDisplayTodo"
+></todo-details>
+
+<button class="btn btn-primary" [disabled]="clickMeButtonDisabled">
+  Click Me
+</button>
