@@ -9,6 +9,10 @@ import { TodoDetailsComponent } from './components/todo-details/todo-details.com
 import { NewTodoComponent } from './components/new-todo/new-todo.component';
 import { TextareaAutosizeDirective } from './helpers/textarea-autosize.directive';
 import { ShortenPipe } from './helpers/shorten.pipe';
+import { AppRoutingModule } from './modules/app-routing/app-routing.module';
+import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { AuthInterceptorProviders } from './services/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -22,9 +26,12 @@ import { ShortenPipe } from './helpers/shorten.pipe';
     ShortenPipe
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    AppRoutingModule,
+    ReactiveFormsModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [AuthInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

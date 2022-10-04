@@ -1,17 +1,44 @@
 <div class="card">
-  <form>
+  <form [formGroup]="todoForm" (ngSubmit)="onSubmitTodo()">
     <div class="control-group">
       <label for="title" class="control-label">Title</label>
-      <input type="text" class="control-input" id="title" autocomplete="off" />
+      <input
+        type="text"
+        class="control-input"
+        id="title"
+        autocomplete="off"
+        formControlName="todoTitle"
+      />
     </div>
+    <p
+      [ngStyle]="{ 'font-size': '1.6rem' }"
+      *ngIf="
+        todoForm.controls['todoTitle'].touched &&
+        todoForm.controls['todoTitle'].invalid
+      "
+    >
+      This field is required!
+    </p>
     <div class="control-group">
       <label for="description" class="control-label">Description</label>
       <textarea
         appTextareaAutosize
         id="description"
         autocomplete="off"
+        formControlName="todoDescription"
       ></textarea>
     </div>
-    <button class="btn btn-primary" type="button" (click)="onSubmitTodo()">Submit</button>
+    <div class="control-group">
+      <label for="date" class="control-label">Date</label>
+      <input
+        type="date"
+        class="control-input"
+        id="date"
+        formControlName="todoDate"
+      />
+    </div>
+    <button class="btn btn-primary" [disabled]="todoForm.invalid" type="submit">
+      Submit
+    </button>
   </form>
 </div>

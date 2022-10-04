@@ -49,14 +49,7 @@ export class TodoService {
     return fetch(`${environment.baseUrl}/todos`);
   }
 
-  createNewTodo() {
-    const newTodo: Todo = {
-      progress: 0,
-      title: 'I need to do this',
-      description:
-        'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nemo ratione ex est autem perferendis voluptatibus numquam aspernatur saepe neque quasi deserunt, consectetur accusamus totam veritatis fugiat aliquam incidunt exercitationem eos!',
-      date: '2022-10-01',
-    };
+  createNewTodo(newTodo: Todo) {
     return fetch(`${environment.baseUrl}/todos`, {
       method: 'POST',
       headers: {

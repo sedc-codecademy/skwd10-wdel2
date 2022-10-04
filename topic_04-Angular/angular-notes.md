@@ -632,3 +632,13 @@ const routes: Routes = [
 })
 export class AppRoutingModule {}
 ```
+
+## Angular Recommended courses
+### Best beginner Angular Course. It's a lot less complicated than the Full Angular course by Max
+https://www.udemy.com/course/angular-full-app-with-angular-material-angularfire-ngrx/
+
+### Best All Round Angular Course. You don't really need anything beyond this.
+https://www.udemy.com/course/the-complete-guide-to-angular-2/learn/lecture/6656462
+
+### Alternative to Max. Also an amazing teacher.
+https://www.udemy.com/course/the-modern-angular-bootcamp/

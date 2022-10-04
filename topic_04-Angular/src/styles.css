@@ -161,3 +161,7 @@ textarea.ng-touched.ng-invalid {
   flex-direction: column;
   gap: 1rem;
 }
+
+.auth-heading {
+  font-weight: 100;
+}

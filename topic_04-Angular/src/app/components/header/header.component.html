@@ -2,13 +2,21 @@
   <div class="container__toolbar">
     <div class="header__brand">{{ headerBrandTitle }}</div>
     <div class="btn-container">
-      <button class="btn btn-primary btn-header">Login</button>
-      <button class="btn btn-danger btn-header">Register</button>
+      <button class="btn btn-primary btn-header" routerLink="auth/login">
+        Login
+      </button>
+      <button class="btn btn-danger btn-header" routerLink="auth/register">
+        Register
+      </button>
     </div>
     <button class="btn btn-danger btn-header">Logout</button>
   </div>
   <nav class="header__nav">
-    <div class="header__nav-item">Add Todo</div>
-    <div class="header__nav-item">Todo's List</div>
+    <div class="header__nav-item" routerLink="new" routerLinkActive="active">
+      Add Todo
+    </div>
+    <div class="header__nav-item" routerLink="todos" routerLinkActive="active">
+      Todo's List
+    </div>
   </nav>
 </header>

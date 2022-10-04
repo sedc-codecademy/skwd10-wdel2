@@ -1,0 +1,35 @@
+<div class="card">
+  <h1 class="auth-heading">Register</h1>
+  <form id="register-form" (ngSubmit)="onSubmitRegister()" #registerForm="ngForm">
+    <div class="control-group">
+      <label for="email" class="control-label">Email</label>
+      <input
+        type="email"
+        class="control-input"
+        id="email"
+        autocomplete="off"
+        name="email"
+        ngModel
+        minlength="5"
+        required
+        email
+        #emailInput
+      />
+    </div>
+    <p class="error-email" *ngIf="!emailInput.value" style="color: red;">
+        Email is required!
+    </p>
+    <div class="control-group">
+      <label for="password" class="control-label">Password</label>
+      <input
+        type="password"
+        class="control-input"
+        id="password"
+        name="password"
+        autocomplete="off"
+        ngModel
+      />
+    </div>
+    <button type="submit" class="btn btn-primary">Register</button>
+  </form>
+</div>
