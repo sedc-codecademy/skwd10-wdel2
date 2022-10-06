@@ -1,6 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Todo } from '../interfaces/todo';
 import { environment } from 'src/environments/environment';
+import { Observable, Subject } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -43,19 +47,32 @@ export class TodoService {
   //     email: 'JustAnotherTest@gmail.com',
   //   },
   // ];
-  constructor() {}
+  constructor(private http: HttpClient, private router: Router) {}
+
+  todosSubject$ = new Subject<Todo[]>();
 
   getAllTodos() {
-    return fetch(`${environment.baseUrl}/todos`);
+    // return fetch(`${environment.baseUrl}/todos`);
+    this.http
+      .get(`${environment.baseUrl}/todos`)
+      .pipe(map((todos) => todos as Todo[]))
+      .subscribe({
+        next: (payload: Todo[]) => this.todosSubject$.next(payload),
+        error: (error) => console.log(error),
+      });
   }
 
   createNewTodo(newTodo: Todo) {
-    return fetch(`${environment.baseUrl}/todos`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(newTodo),
+    // return fetch(`${environment.baseUrl}/todos`, {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //   },
+    //   body: JSON.stringify(newTodo),
+    // });
+    this.http.post(`${environment.baseUrl}/todos`, newTodo).subscribe({
+      next: (value) => console.log(value),
+      error: (err) => console.log(err),
     });
   }
 
@@ -69,15 +86,28 @@ export class TodoService {
   }
 
   updateTodoProgress(progressUpdate: string, id: string | number | undefined) {
-    if (!id) {
-      return Promise.reject({ message: 'Id was not supplied!' });
-    }
-    return fetch(`${environment.baseUrl}/todos/${id}`, {
-      method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ progress: progressUpdate }),
-    });
+    // if (!id) {
+    //   return Promise.reject({ message: 'Id was not supplied!' });
+    // }
+    // return fetch(`${environment.baseUrl}/todos/${id}`, {
+    //   method: 'PATCH',
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //   },
+    //   body: JSON.stringify({ progress: progressUpdate }),
+    // });
+
+    this.http
+      .patch(`${environment.baseUrl}/todos/${id}`, {
+        progress: parseInt(progressUpdate),
+      })
+      .subscribe({
+        next: (value) => {
+          this.getAllTodos();
+        },
+        error: (err) => {
+          console.log(err);
+        }
+      });
   }
 }

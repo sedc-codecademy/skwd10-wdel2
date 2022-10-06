@@ -9,11 +9,19 @@
 <todo-card [currentTodo]="todos[2]"></todo-card>
 <todo-card [currentTodo]="todos[3]"></todo-card> -->
 
-<todo-card
+<!-- With a Subscription Object -->
+<!-- <todo-card
   *ngFor="let todo of todos"
   [currentTodo]="todo"
   (displayTodo)="displayTodoEvent($event)"
+></todo-card> -->
+
+<todo-card
+  *ngFor="let todo of todos$ | async"
+  [currentTodo]="todo"
+  (displayTodo)="displayTodoEvent($event)"
 ></todo-card>
+
 
 <todo-details
   *ngIf="currentDisplayTodo"

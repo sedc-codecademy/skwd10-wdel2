@@ -41,10 +41,7 @@ export class NewTodoComponent implements OnInit {
       progress: 0,
     };
 
-    this.todoService
-      .createNewTodo(newTodo)
-      .then((response) => response.json())
-      .then((result) => console.log(result));
+    this.todoService.createNewTodo(newTodo);
   }
 
   blockedNamesValidation = (

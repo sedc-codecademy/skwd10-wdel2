@@ -10,6 +10,7 @@ import {
   OnInit,
   SimpleChanges,
 } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { Todo } from 'src/app/interfaces/todo';
 import { TodoService } from 'src/app/services/todo.service';
 
@@ -33,6 +34,7 @@ export class TodoPanelComponent
   currentDisplayTodo: Todo;
   randomClass: string = 'random';
   todos: Todo[] = [];
+  todosSubscription: Subscription;
 
   /*
   [Component Hooks]
@@ -58,6 +60,10 @@ export class TodoPanelComponent
     console.log('Constructor invoked!');
   }
 
+  get todos$() {
+    return this.todoService.todosSubject$;
+  }
+
   /*
   Is a lifecycle hook called after Angular has initialized all data.
   Called in the change detection phase.
@@ -65,12 +71,22 @@ export class TodoPanelComponent
   and the dependencies are resolved and passed to the component/directive’s instances.
   */
   ngOnInit(): void {
-    this.todoService
-      .getAllTodos()
-      .then((response) => response.json())
-      .then((result) => {
-        this.todos = result;
-      });
+    // this.todoService
+    //   .getAllTodos()
+    //   .then((response) => response.json())
+    //   .then((result) => {
+    //     this.todos = result;
+    //   });
+    // this.initSubscriptions();
+    this.todoService.getAllTodos();
+  }
+
+  initSubscriptions() {
+    // this.todosSubscription = this.todoService.todosSubject$.subscribe(
+    //   (payload: Todo[]) => {
+    //     this.todos = payload;
+    //   }
+    // );
   }
 
   /*
@@ -79,6 +95,7 @@ export class TodoPanelComponent
   */
   ngOnDestroy(): void {
     console.log('OnDestroy invoked');
+    // this.todosSubscription.unsubscribe();
   }
 
   /* DoCheck is a callback method that performs change detection, 
