@@ -1,0 +1,27 @@
+.header {
+  background-color: #2d3436;
+}
+
+.header__brand {
+  padding: 10px;
+  font-size: 30px;
+}
+
+.header__nav {
+  display: flex;
+  justify-content: space-evenly;
+  flex: 1;
+}
+
+.header__nav > a {
+  background-color: #fdcb6e;
+  padding: 10px;
+  color: #2d3436;
+  font-weight: 600;
+  flex: 1;
+  text-align: center;
+}
+
+.header__nav > a.active {
+  background-color: #a29bfe;
+}
