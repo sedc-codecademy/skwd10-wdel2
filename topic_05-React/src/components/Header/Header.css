@@ -5,6 +5,8 @@
 .header__brand {
   padding: 10px;
   font-size: 30px;
+  color: #fefefe;
+  font-weight: 600;
 }
 
 .header__nav {

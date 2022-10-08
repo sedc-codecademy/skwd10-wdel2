@@ -1,16 +1,20 @@
+import { Link, NavLink } from "react-router-dom";
 import "./Header.css";
 
 const Header = () => {
   return (
     <header className="header">
-      <div className="header__brand">Todo App</div>
+      <div className="header__brand">
+        <Link to="/">TodoApp</Link>
+      </div>
       <nav className="header__nav">
-        <a href="/" className="header__nav-item">
+        {/* If you want exact route URLs you have to define them with the "end" property */}
+        <NavLink end className="header__nav-item" to="/todos/new">
           Add Todo
-        </a>
-        <a href="/" className="header__nav-item">
+        </NavLink>
+        <NavLink end className="header__nav-item" to="/todos/list">
           Todo Panel
-        </a>
+        </NavLink>
       </nav>
     </header>
   );

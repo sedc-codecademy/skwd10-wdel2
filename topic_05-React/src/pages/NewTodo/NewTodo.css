@@ -1,0 +1,21 @@
+.form {
+  padding: 2rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 0;
+}
+
+.form-input {
+  padding: 10px;
+  border-radius: 8px;
+  outline: none;
+  border: none;
+}
+
+.form-label {
+  color: #fefefe;
+  padding: 5px 0;
+}
