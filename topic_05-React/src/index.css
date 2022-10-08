@@ -55,3 +55,8 @@ body {
   color: #fefefe;
   font-size: 2rem;
 }
+
+.loading {
+  font-size: 24px;
+  color: #fefefe;
+}
