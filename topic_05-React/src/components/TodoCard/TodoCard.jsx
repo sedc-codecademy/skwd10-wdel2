@@ -2,7 +2,17 @@ import "./TodoCard.css";
 import Card from "../Card/Card";
 
 const TodoCard = (props) => {
-    console.log(props);
+  const formatDate = () => {
+    const month = props.date.toLocaleString("en-US", { month: "short" });
+    const day = props.date.toLocaleString("en-US", { day: "2-digit" });
+    const year = props.date.getFullYear();
+    return `${month}. ${day} ${year}`;
+  };
+
+  const deleteTodoHandler = () => {
+    props.onDeleteTodo(props.id);
+  };
+
   return (
     <li>
       <Card className="todo-card">
@@ -12,11 +22,13 @@ const TodoCard = (props) => {
             <div className="todo-card__progress">
               {props.progress.toFixed(2)}%
             </div>
-            <div className="todo-card__date">{props.date}</div>
+            <div className="todo-card__date">{formatDate()}</div>
             <div className="todo-card__description">{props.description}</div>
           </div>
           <div className="todo-card__actions">
-            <button className="btn-danger">Delete Todo</button>
+            <button className="btn-danger" onClick={deleteTodoHandler}>
+              Delete Todo
+            </button>
           </div>
         </div>
       </Card>

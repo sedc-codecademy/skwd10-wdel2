@@ -2,6 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import "./App.css";
 import Header from "./components/Header/Header";
 import Home from "./pages/Home/Home";
+import NotFound from "./pages/NotFound/NotFound";
 import TodoRoutes from "./pages/Todos/TodoRoutes";
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/todos/*" element={<TodoRoutes />} />
+        <Route path="*" element={<NotFound />}></Route>
       </Routes>
     </>
   );

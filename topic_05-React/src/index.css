@@ -50,3 +50,8 @@ body {
 .todos {
   padding: 1rem;
 }
+
+.todos-label {
+  color: #fefefe;
+  font-size: 2rem;
+}
