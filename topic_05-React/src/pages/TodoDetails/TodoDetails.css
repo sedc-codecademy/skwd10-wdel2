@@ -1,0 +1,40 @@
+.todo-details {
+  background-color: #fefefe;
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+
+.todo-details__header {
+  color: #2d3436;
+  font-size: 1.6rem;
+}
+
+progress {
+  -webkit-appearance: none;
+}
+
+::-webkit-progress-bar {
+  background-color: #2d3436;
+  border-radius: 8px;
+  outline: none;
+  border: 1px solid #fefefe;
+  height: 30px;
+}
+
+::-webkit-progress-value {
+  border-radius: 8px 0px 0 8px;
+  background-color: #fdcb6e;
+}
+
+.todo-details__date {
+  font-size: 1.4rem;
+}
+
+.todo-details__description {
+  background-color: #2d3436;
+  color: #fefefe;
+  padding: 0.5rem;
+  border-radius: 8px;
+  font-size: 1.2rem;
+}

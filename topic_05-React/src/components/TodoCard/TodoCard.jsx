@@ -1,5 +1,6 @@
 import "./TodoCard.css";
 import Card from "../Card/Card";
+import { Link } from "react-router-dom";
 
 const TodoCard = (props) => {
   const formatDate = () => {
@@ -13,6 +14,7 @@ const TodoCard = (props) => {
     props.onDeleteTodo(props.id);
   };
 
+  const todoDetailsNav = `/todos/${props.id}`;
   return (
     <li>
       <Card className="todo-card">
@@ -29,6 +31,11 @@ const TodoCard = (props) => {
             <button className="btn-danger" onClick={deleteTodoHandler}>
               Delete Todo
             </button>
+            <Link to={todoDetailsNav}>
+              <button type="button" className="btn-primary">
+                Details
+              </button>
+            </Link>
           </div>
         </div>
       </Card>

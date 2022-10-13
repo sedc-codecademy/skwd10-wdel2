@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./NewTodo.css";
+import axios from "axios";
 
 const NewTodo = () => {
   const [enteredTitle, setEnteredTitle] = useState("");
@@ -39,15 +40,22 @@ const NewTodo = () => {
         progress: 0,
       };
 
-      const options = {
-        method: "POST",
-        body: JSON.stringify(newTodo),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      };
-      const response = await fetch("http://localhost:4000/api/todos", options);
-      const result = await response.json();
+      // const options = {
+      //   method: "POST",
+      //   body: JSON.stringify(newTodo),
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //   },
+      // };
+      // const response = await fetch("http://localhost:4000/api/todos", options);
+      // const result = await response.json();
+      // console.log(result);
+      const httpRequest = axios({
+        method: "post",
+        url: "http://localhost:4000/api/todos",
+        data: newTodo,
+      });
+      const result = await httpRequest;
       console.log(result);
     } catch (error) {
       console.log(error);

@@ -16,3 +16,8 @@
   font-weight: 600;
   text-transform: uppercase;
 }
+
+.todo-card__actions {
+  display: flex;
+  justify-content: space-between;
+}
