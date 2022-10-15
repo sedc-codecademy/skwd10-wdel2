@@ -1,12 +1,10 @@
 import {
   Injectable,
-  NotFoundException,
   BadRequestException,
 } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Todo, TodoDocument } from './helpers/todo.schema';
 import { Model } from 'mongoose';
-import { CreateTodoDto } from './helpers/create-todo.dto';
 
 @Injectable()
 export class TodosService {

@@ -27,6 +27,9 @@ export class Course {
   @Column()
   endDate: string;
 
+  @Column()
+  isActive: boolean;
+
   @OneToMany(() => Student, (student) => student.course)
-  students: Student[];
+  student: Student[];
 }

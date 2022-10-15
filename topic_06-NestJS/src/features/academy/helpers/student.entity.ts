@@ -26,7 +26,7 @@ export class Student {
   @OneToOne(() => ContactDetails, (contactDetails) => contactDetails.student)
   contactDetails: ContactDetails;
 
-  @ManyToOne(() => Course, (course) => course.students)
+  @ManyToOne(() => Course, (course) => course.student)
   @JoinColumn()
   course: Course;
 }
