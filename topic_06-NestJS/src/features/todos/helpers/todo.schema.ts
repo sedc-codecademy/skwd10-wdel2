@@ -12,9 +12,9 @@ export class Todo {
   date: string;
 
   @Prop({ required: true })
-  progress: string;
+  progress: number;
 
-  @Prop({ maxlength: 20, required: true })
+  @Prop({ maxlength: 150, required: true })
   description: string;
 }
 
