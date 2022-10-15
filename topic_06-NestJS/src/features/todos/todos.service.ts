@@ -43,5 +43,11 @@ export class TodosService {
     }
   }
 
-  async deleteTodo() {}
+  async deleteTodo(todoId: string) {
+    try {
+      return await this.todoModel.findByIdAndDelete(todoId).exec();
+    } catch (error) {
+      throw new BadRequestException(error);
+    }
+  }
 }
